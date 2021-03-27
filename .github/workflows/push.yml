@@ -86,7 +86,8 @@ jobs:
           GitHub Action: https://github.com/${{ github.repository }}/actions/runs/$GITHUB_RUN_ID
           "
           git push "git@github.com:Amazefcc233/robot-download" main:main
-  fcc=hitokoto:
+  
+  fcc-hitokoto:
     if: contains(github.event.head_commit.message, 'pluginName=fcc-hitokoto')
     runs-on: ubuntu-latest
     steps:
