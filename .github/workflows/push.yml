@@ -63,9 +63,9 @@ jobs:
           jq -n \
             --arg build_number "$build_number" \
             --arg version "$version_number" \
-            --arg download_url_1 "https://robot-download.amazefcc233.com/download/$plugin_name/$build_number/$asset_name" \
-            --arg download_url_2 "https://robot-ghdl.amazefcc233.com/download/$plugin_name/$build_number/$asset_name" \
-            --arg download_url_3 "https://bitbucket.org/Amazefcc233/robot-download/raw/main/download/$plugin_name/$build_number/$asset_name" \
+            --arg download_url_1 "https://robot-download.amazefcc233.com/downloads/$plugin_name/$build_number/$asset_name" \
+            --arg download_url_2 "https://robot-ghdl.amazefcc233.com/downloads/$plugin_name/$build_number/$asset_name" \
+            --arg download_url_3 "https://bitbucket.org/Amazefcc233/robot-download/raw/main/downloads/$plugin_name/$build_number/$asset_name" \
             '
               {
                 "build_number": $build_number|tonumber,
