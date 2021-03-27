@@ -112,7 +112,7 @@
 		})
 			.then(response => response.json())
 			.then(versionInfo => {
-				document.getElementById("versionInfoFileName").textContent = versionInfo.download_url.split("/").pop();
+				document.getElementById("versionInfoFileName").textContent = versionInfo.download_url_1.split("/").pop();
 				document.getElementById("versionInfoVersion").textContent = versionInfo.version;
 				document.getElementById("versionInfoBuildNumber").textContent = versionInfo.build_number;
 				document.getElementById("versionInfoDownloadBtn1").setAttribute("href", versionInfo.download_url_1);
