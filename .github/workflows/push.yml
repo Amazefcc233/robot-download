@@ -74,7 +74,7 @@ jobs:
                 "version": $version,
                 "download_url": {
                   "vercel": $download_url_1,
-                  "gh-pages": $download_url_2,
+                  "ghPages": $download_url_2,
                   "bitbucket": $download_url_3
                 }
               }
