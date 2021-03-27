@@ -1,6 +1,6 @@
-# authlib-injector.yushi.moe
-本项目提供 [authlib-injector](https://github.com/yushijinhun/authlib-injector) 下载服务。
+# robot-download
+本项目提供来自于 [fccのrobot](https://robot.amazefcc233.com) 中部分开源项目的相关下载转接服务。
 
-此 API 部署于 GitHub Pages 上，URL 为 [https://authlib-injector.yushi.moe/](https://authlib-injector.yushi.moe/)。API 文档请参见 [authlib-injector wiki](https://github.com/yushijinhun/authlib-injector/wiki/%E8%8E%B7%E5%8F%96-authlib-injector)。
+此内容部署于 Vercel&GitHub Pages&Bitbucket 上，URL 为 [https://robot-download.amazefcc233.com/](https://robot-download.amazefcc233.com/)。
 
-此分支为 `master` 分支，用于存储构建输出。
+此项目核心及绝大部分内容全部照搬[yushijinhun/authlib-injector.yushi.moe](https://github.com/yushijinhun/authlib-injector.yushi.moe)。
