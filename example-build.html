@@ -4,7 +4,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<title>获取 authlib-injector</title>
+	<title>获取 example-build</title>
 
 	<link rel="icon" href="img/favicon.png">
 
@@ -54,12 +54,6 @@
 				<li class="nav-item active">
 					<a class="nav-link" href="#">下载</a>
 				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="https://github.com/yushijinhun/authlib-injector/wiki">Wiki</a>
-				</li>
-				<li class="nav-item">
-					<a class="nav-link" href="https://github.com/yushijinhun/authlib-injector">GitHub</a>
-				</li>
 			</ul>
 		</div>
 	</nav>
@@ -99,13 +93,11 @@
 							<th scope="row">构建编号</th>
 							<td id="versionInfoBuildNumber">$buildNumber</td>
 						</tr>
-						<tr>
-							<th scope="row">SHA-256</th>
-							<td id="versionInfoSHA256">$sha256</td>
-						</tr>
 					</tbody>
 				</table>
-				<a id="versionInfoDownloadBtn" href="$downloadUrl" class="btn btn-outline-primary">下载</a>
+				<a id="versionInfoDownloadBtn1" href="$downloadUrl1" class="btn btn-outline-primary">下载</a>
+				<a id="versionInfoDownloadBtn2" href="$downloadUrl2" class="btn btn-outline-primary">下载</a>
+				<a id="versionInfoDownloadBtn3" href="$downloadUrl3" class="btn btn-outline-primary">下载</a>
 			</div>
 		</div>
 
@@ -114,13 +106,13 @@
 	<footer class="footer mt-auto py-3">
 		<div class="container">
 			<span class="text-muted">
-				Powered by <a href="https://github.com/yushijinhun/authlib-injector.yushi.moe">GitHub Pages</a><!-- [[IF_BMCLAPI]] and <a href="https://bmclapidoc.bangbang93.com/">BMCLAPI</a>-->.
+				Powered by <a href="https://github.com/amazefcc233/robot-download">GitHub Pages</a>.
 			</span>
 		</div>
 	</footer>
 
 	<script>
-		fetch("artifact/latest.json", {
+		fetch("artifact/example-build/latest.json", {
 			cache: "no-cache",
 			mode: "cors"
 		})
@@ -129,8 +121,9 @@
 				document.getElementById("versionInfoFileName").textContent = versionInfo.download_url.split("/").pop();
 				document.getElementById("versionInfoVersion").textContent = versionInfo.version;
 				document.getElementById("versionInfoBuildNumber").textContent = versionInfo.build_number;
-				document.getElementById("versionInfoSHA256").textContent = versionInfo.checksums.sha256;
-				document.getElementById("versionInfoDownloadBtn").setAttribute("href", versionInfo.download_url);
+				document.getElementById("versionInfoDownloadBtn1").setAttribute("href", versionInfo.download_url_1);
+				document.getElementById("versionInfoDownloadBtn2").setAttribute("href", versionInfo.download_url_2);
+				document.getElementById("versionInfoDownloadBtn3").setAttribute("href", versionInfo.download_url_3);
 				document.getElementById("versionInfo").classList.remove("d-none");
 			})
 			.catch(error => {
