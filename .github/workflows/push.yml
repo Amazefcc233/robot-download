@@ -86,4 +86,79 @@ jobs:
           GitHub Action: https://github.com/${{ github.repository }}/actions/runs/$GITHUB_RUN_ID
           "
           git push "git@github.com:Amazefcc233/robot-download" main:main
+  fcc=hitokoto:
+    if: contains(github.event.head_commit.message, 'pluginName=fcc-hitokoto')
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      #- uses: actions/checkout@v2
+      #  with:
+      #    fetch-depth: 1
+          
+      - name: Install deploy key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.SSH_KEY }}
+          known_hosts: ${{ secrets.KNOWN_HOSTS }}
+      
+      - name: Restore Amazefcc233/robot-download:main cache
+        uses: actions/cache@v1
+        with:
+          path: ~/deploy
+          key: cache-deploy
+
+      - name: Pull Amazefcc233/robot-download:main
+        shell: bash
+        run: |
+          if [ -d ~/deploy ]; then
+            cd ~/deploy
+            git fetch origin
+            git add --all
+            git reset --hard origin/master
+          else
+            git clone --single-branch --branch main "git@github.com:Amazefcc233/robot-download" ~/deploy
+          fi
+
+      - name: Deploy
+        shell: bash
+        run: |
+          commit_body='${{ github.event.head_commit.message }}'
+          plugin_name=$(grep -Pom1 '(?<=pluginName=)[\w.]*' <<< $commit_body)
+          asset_name=$(grep -Pom1 '(?<=FileName=)[\w.]*' <<< $commit_body)
+          build_number=$(grep -Pom1 '(?<=BuildNum=)[\w.]*' <<< $commit_body)
+          version_number=$(grep -Pom1 '(?<=VersionNum=)[\w.]*' <<< $commit_body)
+          
+          cd ~/deploy
+          
+          git config --local user.name "fcc plugins Deploy Bot"
+          git config --local user.email "bot@amazefcc233.com"
+          
+          mkdir -p "artifact/$plugin_name/$build_number"
+          
+          jq -n \
+            --arg build_number "$build_number" \
+            --arg version "$version_number" \
+            --arg download_url_1 "https://robot-download.amazefcc233.com/downloads/$plugin_name/$build_number/$asset_name" \
+            --arg download_url_2 "https://robot-ghdl.amazefcc233.com/downloads/$plugin_name/$build_number/$asset_name" \
+            --arg download_url_3 "https://bitbucket.org/Amazefcc233/robot-download/raw/main/downloads/$plugin_name/$build_number/$asset_name" \
+            '
+              {
+                "build_number": $build_number|tonumber,
+                "version": $version,
+                "download_url": {
+                  "vercel": $download_url_1,
+                  "gh-pages": $download_url_2,
+                  "bitbucket": $download_url_3
+                }
+              }
+            ' > "artifact/$plugin_name/$build_number.json"
+          
+          rm -f artifact/$plugin_name/latest.json
+          ln -s "$build_number.json" "artifact/$plugin_name/latest.json"
+          
+          git add --all
+          git commit -m "Release New Version: $version_number ($build_number)
+          GitHub Action: https://github.com/${{ github.repository }}/actions/runs/$GITHUB_RUN_ID
+          "
+          git push "git@github.com:Amazefcc233/robot-download" main:main
 
