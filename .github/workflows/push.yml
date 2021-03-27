@@ -124,10 +124,10 @@ jobs:
         shell: bash
         run: |
           commit_body='${{ github.event.head_commit.message }}'
-          plugin_name=$(grep -Pom1 '(?<=pluginName=)[\w.]*' <<< $commit_body)
-          asset_name=$(grep -Pom1 '(?<=FileName=)[\w.]*' <<< $commit_body)
-          build_number=$(grep -Pom1 '(?<=BuildNum=)[\w.]*' <<< $commit_body)
-          version_number=$(grep -Pom1 '(?<=VersionNum=)[\w.]*' <<< $commit_body)
+          plugin_name=$(grep -Pom1 '(?<=pluginName=)[\S.]*' <<< $commit_body)
+          asset_name=$(grep -Pom1 '(?<=FileName=)[\S.]*' <<< $commit_body)
+          build_number=$(grep -Pom1 '(?<=BuildNum=)[\S.]*' <<< $commit_body)
+          version_number=$(grep -Pom1 '(?<=VersionNum=)[\S.]*' <<< $commit_body)
           
           cd ~/deploy
           
