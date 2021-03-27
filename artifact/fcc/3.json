@@ -1,0 +1,9 @@
+{
+  "build_number": 3,
+  "version": "1.0.3",
+  "download_url": {
+    "vercel": "https://robot-download.amazefcc233.com/downloads/fcc/3/hitokoto_1.0.3_3.zip",
+    "gh-pages": "https://robot-ghdl.amazefcc233.com/downloads/fcc/3/hitokoto_1.0.3_3.zip",
+    "bitbucket": "https://bitbucket.org/Amazefcc233/robot-download/raw/main/downloads/fcc/3/hitokoto_1.0.3_3.zip"
+  }
+}
