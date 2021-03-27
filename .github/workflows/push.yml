@@ -115,7 +115,7 @@ jobs:
             cd ~/deploy
             git fetch origin
             git add --all
-            git reset --hard origin/master
+            git reset --hard origin/main
           else
             git clone --single-branch --branch main "git@github.com:Amazefcc233/robot-download" ~/deploy
           fi
