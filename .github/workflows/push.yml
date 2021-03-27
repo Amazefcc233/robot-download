@@ -69,6 +69,7 @@ jobs:
             --arg download_url_3 "https://bitbucket.org/Amazefcc233/robot-download/raw/main/downloads/$plugin_name/$build_number/$asset_name" \
             '
               {
+                "filename": $filename,
                 "build_number": $build_number|tonumber,
                 "version": $version,
                 "download_url": {
