@@ -61,6 +61,7 @@ jobs:
           mkdir -p "artifact/$plugin_name/$build_number"
           
           jq -n \
+            --arg filename "$asset_name" \
             --arg build_number "$build_number" \
             --arg version "$version_number" \
             --arg download_url_1 "https://robot-download.amazefcc233.com/downloads/$plugin_name/$build_number/$asset_name" \
