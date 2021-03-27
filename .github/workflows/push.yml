@@ -39,7 +39,7 @@ jobs:
             cd ~/deploy
             git fetch origin
             git add --all
-            git reset --hard origin/master
+            git reset --hard origin/main
           else
             git clone --single-branch --branch main "git@github.com:Amazefcc233/robot-download" ~/deploy
           fi
@@ -48,10 +48,10 @@ jobs:
         shell: bash
         run: |
           commit_body='${{ github.event.head_commit.message }}'
-          plugin_name=$(grep -Pom1 '(?<=pluginName=)[\w.]*' <<< $commit_body)
-          asset_name=$(grep -Pom1 '(?<=FileName=)[\w.]*' <<< $commit_body)
-          build_number=$(grep -Pom1 '(?<=BuildNum=)[\w.]*' <<< $commit_body)
-          version_number=$(grep -Pom1 '(?<=VersionNum=)[\w.]*' <<< $commit_body)
+          plugin_name=$(grep -Pom1 '(?<=pluginName=)[\S.]*' <<< $commit_body)
+          asset_name=$(grep -Pom1 '(?<=FileName=)[\S.]*' <<< $commit_body)
+          build_number=$(grep -Pom1 '(?<=BuildNum=)[\S.]*' <<< $commit_body)
+          version_number=$(grep -Pom1 '(?<=VersionNum=)[\S.]*' <<< $commit_body)
           
           cd ~/deploy
           
@@ -64,9 +64,9 @@ jobs:
             --arg filename "$asset_name" \
             --arg build_number "$build_number" \
             --arg version "$version_number" \
-            --arg download_url_1 "https://robot-download.amazefcc233.com/downloads/$plugin_name/$build_number/$asset_name" \
-            --arg download_url_2 "https://robot-ghdl.amazefcc233.com/downloads/$plugin_name/$build_number/$asset_name" \
-            --arg download_url_3 "https://bitbucket.org/Amazefcc233/robot-download/raw/main/downloads/$plugin_name/$build_number/$asset_name" \
+            --arg download_url_1 "https://robot-download.amazefcc233.com/downloads/$plugin_name/$asset_name" \
+            --arg download_url_2 "https://robot-ghdl.amazefcc233.com/downloads/$plugin_name/$asset_name" \
+            --arg download_url_3 "https://bitbucket.org/Amazefcc233/robot-download/raw/main/downloads/$plugin_name/$asset_name" \
             '
               {
                 "filename": $filename,
@@ -141,16 +141,16 @@ jobs:
           jq -n \
             --arg build_number "$build_number" \
             --arg version "$version_number" \
-            --arg download_url_1 "https://robot-download.amazefcc233.com/downloads/$plugin_name/$build_number/$asset_name" \
-            --arg download_url_2 "https://robot-ghdl.amazefcc233.com/downloads/$plugin_name/$build_number/$asset_name" \
-            --arg download_url_3 "https://bitbucket.org/Amazefcc233/robot-download/raw/main/downloads/$plugin_name/$build_number/$asset_name" \
+            --arg download_url_1 "https://robot-download.amazefcc233.com/downloads/$plugin_name/$asset_name" \
+            --arg download_url_2 "https://robot-ghdl.amazefcc233.com/downloads/$plugin_name/$asset_name" \
+            --arg download_url_3 "https://bitbucket.org/Amazefcc233/robot-download/raw/main/downloads/$plugin_name/$asset_name" \
             '
               {
                 "build_number": $build_number|tonumber,
                 "version": $version,
                 "download_url": {
                   "vercel": $download_url_1,
-                  "gh-pages": $download_url_2,
+                  "ghPages": $download_url_2,
                   "bitbucket": $download_url_3
                 }
               }
